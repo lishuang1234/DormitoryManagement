@@ -61,22 +61,6 @@ public class DormitoryManagement extends JFrame implements ActionListener {
 	private JButton inforUpdate_btn_update;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					DormitoryManagement window = new DormitoryManagement();
-					window.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the application.
 	 */
 	public DormitoryManagement() {
@@ -725,54 +709,71 @@ public class DormitoryManagement extends JFrame implements ActionListener {
 		inforSeek.setLayout(gl_inforSeek);
 		gl_inforSeek.setAutoCreateGaps(false);
 		gl_inforSeek.setAutoCreateContainerGaps(false);
+
+		JLabel lblDevelopByLs = new JLabel("develop by ls");
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		groupLayout
 				.setHorizontalGroup(groupLayout
 						.createParallelGroup(Alignment.LEADING)
 						.addGroup(
-								groupLayout.createSequentialGroup().addGap(235)
-										.addComponent(lblNewLabel))
-						.addGroup(
 								groupLayout
 										.createSequentialGroup()
-										.addGap(10)
-										.addComponent(function,
-												GroupLayout.PREFERRED_SIZE, 89,
-												GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(
-												ComponentPlacement.RELATED)
 										.addGroup(
 												groupLayout
 														.createParallelGroup(
 																Alignment.LEADING)
-														.addComponent(
-																scrollPane,
-																Alignment.TRAILING,
-																GroupLayout.DEFAULT_SIZE,
-																479,
-																Short.MAX_VALUE)
-														.addComponent(
-																inforAdd,
-																GroupLayout.DEFAULT_SIZE,
-																479,
-																Short.MAX_VALUE)
-														.addComponent(
-																inforSeek,
-																Alignment.TRAILING,
-																GroupLayout.DEFAULT_SIZE,
-																479,
-																Short.MAX_VALUE)
-														.addComponent(
-																inforUpdate,
-																Alignment.TRAILING,
-																GroupLayout.DEFAULT_SIZE,
-																479,
-																Short.MAX_VALUE)
-														.addComponent(
-																inforDelete,
-																GroupLayout.DEFAULT_SIZE,
-																479,
-																Short.MAX_VALUE))
+														.addGroup(
+																groupLayout
+																		.createSequentialGroup()
+																		.addGap(235)
+																		.addComponent(
+																				lblNewLabel)
+																		.addGap(18)
+																		.addComponent(
+																				lblDevelopByLs))
+														.addGroup(
+																groupLayout
+																		.createSequentialGroup()
+																		.addGap(10)
+																		.addComponent(
+																				function,
+																				GroupLayout.PREFERRED_SIZE,
+																				89,
+																				GroupLayout.PREFERRED_SIZE)
+																		.addPreferredGap(
+																				ComponentPlacement.RELATED)
+																		.addGroup(
+																				groupLayout
+																						.createParallelGroup(
+																								Alignment.LEADING)
+																						.addComponent(
+																								scrollPane,
+																								Alignment.TRAILING,
+																								GroupLayout.DEFAULT_SIZE,
+																								479,
+																								Short.MAX_VALUE)
+																						.addComponent(
+																								inforAdd,
+																								GroupLayout.DEFAULT_SIZE,
+																								479,
+																								Short.MAX_VALUE)
+																						.addComponent(
+																								inforSeek,
+																								Alignment.TRAILING,
+																								GroupLayout.DEFAULT_SIZE,
+																								479,
+																								Short.MAX_VALUE)
+																						.addComponent(
+																								inforUpdate,
+																								Alignment.TRAILING,
+																								GroupLayout.DEFAULT_SIZE,
+																								479,
+																								Short.MAX_VALUE)
+																						.addComponent(
+																								inforDelete,
+																								GroupLayout.DEFAULT_SIZE,
+																								479,
+																								Short.MAX_VALUE))))
 										.addContainerGap()));
 		groupLayout
 				.setVerticalGroup(groupLayout
@@ -781,7 +782,14 @@ public class DormitoryManagement extends JFrame implements ActionListener {
 								groupLayout
 										.createSequentialGroup()
 										.addGap(10)
-										.addComponent(lblNewLabel)
+										.addGroup(
+												groupLayout
+														.createParallelGroup(
+																Alignment.BASELINE)
+														.addComponent(
+																lblNewLabel)
+														.addComponent(
+																lblDevelopByLs))
 										.addGap(6)
 										.addGroup(
 												groupLayout
@@ -826,7 +834,7 @@ public class DormitoryManagement extends JFrame implements ActionListener {
 																		.addComponent(
 																				scrollPane,
 																				GroupLayout.DEFAULT_SIZE,
-																				108,
+																				61,
 																				Short.MAX_VALUE)))
 										.addContainerGap()));
 		groupLayout.setAutoCreateGaps(true);
