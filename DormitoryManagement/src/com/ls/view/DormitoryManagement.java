@@ -22,9 +22,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.table.AbstractTableModel;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 
 import com.ls.bean.StudentInfor;
@@ -56,8 +56,9 @@ public class DormitoryManagement extends JFrame implements ActionListener {
 	private JTable infor_table;
 	private List<StudentInfor> listStudentInfors;
 	private String[][] arrayStudentinfor;
-	private String[] tableTitle = new String[] { "学号", "姓名", "寝室", "班级", "学院" };
+	private String[] tableTitle = new String[] { "学号", "姓名", "寝室号", "班级", "学院" };
 	private DefaultTableModel tableModel;
+	private JButton inforUpdate_btn_update;
 
 	/**
 	 * Launch the application.
@@ -81,6 +82,7 @@ public class DormitoryManagement extends JFrame implements ActionListener {
 	public DormitoryManagement() {
 		showTableData();
 		tableModel = new DefaultTableModel(arrayStudentinfor, tableTitle);
+		tableModel.addTableModelListener(new MTableListener());
 		initialize();
 	}
 
@@ -123,9 +125,6 @@ public class DormitoryManagement extends JFrame implements ActionListener {
 		inforAdd = new JPanel();
 		// inforAdd.setVisible(false);
 		inforAdd.setBackground(Color.LIGHT_GRAY);
-
-		inforSeek = new JPanel();
-		inforSeek.setBackground(Color.LIGHT_GRAY);
 
 		inforDelete = new JPanel();
 		inforDelete.setBackground(Color.LIGHT_GRAY);
@@ -270,8 +269,9 @@ public class DormitoryManagement extends JFrame implements ActionListener {
 		JButton inforUpdate_btn_modify = new JButton("\u67E5\u8BE2");
 		inforUpdate_btn_modify.addActionListener(this);
 
-		JButton inforUpdate_btn_update = new JButton("\u4FEE\u6539");
+		inforUpdate_btn_update = new JButton("\u4FEE\u6539");
 		inforUpdate_btn_update.addActionListener(this);
+		inforUpdate_btn_update.setEnabled(false);
 		GroupLayout gl_inforUpdate = new GroupLayout(inforUpdate);
 		gl_inforUpdate
 				.setHorizontalGroup(gl_inforUpdate
@@ -349,107 +349,6 @@ public class DormitoryManagement extends JFrame implements ActionListener {
 												GroupLayout.DEFAULT_SIZE,
 												Short.MAX_VALUE)));
 		inforUpdate.setLayout(gl_inforUpdate);
-		// groupLayout.setAutoCreateGaps(true);
-
-		JLabel label_6 = new JLabel("\u4FE1\u606F\u67E5\u8BE2");
-
-		JLabel label_7 = new JLabel("\u9009\u62E9\u67E5\u8BE2\u9009\u9879");
-
-		JComboBox inforSeek_selection = new JComboBox();// 查询条目
-		inforSeek_selection.addItemListener(new ItemListener() {// 选择条目发生变化
-
-					@Override
-					public void itemStateChanged(ItemEvent e) {
-						// TODO Auto-generated method stub
-						if (e.getStateChange() == ItemEvent.SELECTED) {
-							inforSeek_selection_item = (String) e.getItem();
-							System.out.println(inforSeek_selection_item);
-						}
-					}
-				});
-		inforSeek_selection.setModel(new DefaultComboBoxModel(new String[] {
-				"\u5B66\u53F7", "\u59D3\u540D", "\u5B66\u9662", "\u73ED\u7EA7",
-				"\u5BDD\u5BA4\u53F7" }));
-
-		inforSeek_content = new JTextField();
-		inforSeek_content.setColumns(10);
-
-		JButton inforSeek_btn_enture = new JButton("\u786E\u8BA4\u67E5\u8BE2");
-
-		inforSeek_btn_enture.addActionListener(this);
-
-		GroupLayout gl_inforSeek = new GroupLayout(inforSeek);
-		gl_inforSeek
-				.setHorizontalGroup(gl_inforSeek
-						.createParallelGroup(Alignment.LEADING)
-						.addGroup(
-								gl_inforSeek
-										.createSequentialGroup()
-										.addGroup(
-												gl_inforSeek
-														.createParallelGroup(
-																Alignment.LEADING)
-														.addGroup(
-																gl_inforSeek
-																		.createSequentialGroup()
-																		.addGap(34)
-																		.addComponent(
-																				label_7)
-																		.addPreferredGap(
-																				ComponentPlacement.RELATED)
-																		.addComponent(
-																				inforSeek_selection,
-																				GroupLayout.PREFERRED_SIZE,
-																				71,
-																				GroupLayout.PREFERRED_SIZE)
-																		.addPreferredGap(
-																				ComponentPlacement.RELATED)
-																		.addComponent(
-																				inforSeek_content,
-																				GroupLayout.PREFERRED_SIZE,
-																				GroupLayout.DEFAULT_SIZE,
-																				GroupLayout.PREFERRED_SIZE)
-																		.addGap(12)
-																		.addComponent(
-																				inforSeek_btn_enture))
-														.addGroup(
-																gl_inforSeek
-																		.createSequentialGroup()
-																		.addGap(216)
-																		.addComponent(
-																				label_6)))
-										.addContainerGap(46, Short.MAX_VALUE)));
-		gl_inforSeek
-				.setVerticalGroup(gl_inforSeek
-						.createParallelGroup(Alignment.LEADING)
-						.addGroup(
-								gl_inforSeek
-										.createSequentialGroup()
-										.addGap(6)
-										.addComponent(label_6)
-										.addPreferredGap(
-												ComponentPlacement.RELATED)
-										.addGroup(
-												gl_inforSeek
-														.createParallelGroup(
-																Alignment.BASELINE)
-														.addComponent(
-																inforSeek_selection,
-																GroupLayout.PREFERRED_SIZE,
-																GroupLayout.DEFAULT_SIZE,
-																GroupLayout.PREFERRED_SIZE)
-														.addComponent(
-																inforSeek_btn_enture)
-														.addComponent(label_7)
-														.addComponent(
-																inforSeek_content,
-																GroupLayout.PREFERRED_SIZE,
-																GroupLayout.DEFAULT_SIZE,
-																GroupLayout.PREFERRED_SIZE))
-										.addContainerGap(
-												GroupLayout.DEFAULT_SIZE,
-												Short.MAX_VALUE)));
-		inforSeek.setLayout(gl_inforSeek);
 
 		JLabel label = new JLabel("\u4FE1\u606F\u6DFB\u52A0");
 
@@ -565,7 +464,7 @@ public class DormitoryManagement extends JFrame implements ActionListener {
 																										.addComponent(
 																												inforAdd_number,
 																												GroupLayout.PREFERRED_SIZE,
-																												74,
+																												75,
 																												GroupLayout.PREFERRED_SIZE)))
 																		.addPreferredGap(
 																				ComponentPlacement.RELATED)
@@ -706,18 +605,126 @@ public class DormitoryManagement extends JFrame implements ActionListener {
 		function.add(functionBtnUpdate);
 
 		JButton functionBtnDelete = new JButton("\u4FE1\u606F\u5220\u9664");
-		function.add(functionBtnDelete);
 		functionBtnDelete.addActionListener(this);
+		function.add(functionBtnDelete);
+
+		JButton functionBtnShow = new JButton("\u663E\u793A\u5168\u90E8");
+		function.add(functionBtnShow);
+		functionBtnShow.addActionListener(this);
 		gl_inforAdd.setAutoCreateGaps(false);
 		gl_inforAdd.setAutoCreateContainerGaps(false);// 设置自动填充与容器间的空隙
 		gl_inforDelete.setAutoCreateGaps(false);
 		gl_inforDelete.setAutoCreateContainerGaps(false);// 设置自动填充与容器间的空隙
-		gl_inforSeek.setAutoCreateGaps(false);
-		gl_inforSeek.setAutoCreateContainerGaps(false);// 设置自动填充与容器间的空隙
 		gl_inforUpdate.setAutoCreateGaps(false);
 		gl_inforUpdate.setAutoCreateContainerGaps(false);
 
 		JScrollPane scrollPane = new JScrollPane();
+
+		inforSeek = new JPanel();
+		inforSeek.setBackground(Color.LIGHT_GRAY);
+		// groupLayout.setAutoCreateGaps(true);
+
+		JLabel label_6 = new JLabel("\u4FE1\u606F\u67E5\u8BE2");
+
+		JLabel label_7 = new JLabel("\u9009\u62E9\u67E5\u8BE2\u9009\u9879");
+
+		JComboBox inforSeek_selection = new JComboBox();// 查询条目
+		inforSeek_selection.addItemListener(new ItemListener() {// 选择条目发生变化
+
+					@Override
+					public void itemStateChanged(ItemEvent e) {
+						// TODO Auto-generated method stub
+						if (e.getStateChange() == ItemEvent.SELECTED) {
+							inforSeek_selection_item = (String) e.getItem();
+							System.out.println(inforSeek_selection_item);
+						}
+					}
+				});
+		inforSeek_selection.setModel(new DefaultComboBoxModel(new String[] {
+				"\u5B66\u53F7", "\u59D3\u540D", "\u5B66\u9662", "\u73ED\u7EA7",
+				"\u5BDD\u5BA4\u53F7" }));
+
+		inforSeek_content = new JTextField();
+		inforSeek_content.setColumns(10);
+
+		JButton inforSeek_btn_enture = new JButton("\u786E\u8BA4\u67E5\u8BE2");
+
+		inforSeek_btn_enture.addActionListener(this);
+
+		GroupLayout gl_inforSeek = new GroupLayout(inforSeek);
+		gl_inforSeek
+				.setHorizontalGroup(gl_inforSeek
+						.createParallelGroup(Alignment.LEADING)
+						.addGroup(
+								gl_inforSeek
+										.createSequentialGroup()
+										.addGroup(
+												gl_inforSeek
+														.createParallelGroup(
+																Alignment.LEADING)
+														.addGroup(
+																gl_inforSeek
+																		.createSequentialGroup()
+																		.addGap(34)
+																		.addComponent(
+																				label_7)
+																		.addPreferredGap(
+																				ComponentPlacement.RELATED)
+																		.addComponent(
+																				inforSeek_selection,
+																				GroupLayout.PREFERRED_SIZE,
+																				71,
+																				GroupLayout.PREFERRED_SIZE)
+																		.addPreferredGap(
+																				ComponentPlacement.RELATED)
+																		.addComponent(
+																				inforSeek_content,
+																				GroupLayout.PREFERRED_SIZE,
+																				GroupLayout.DEFAULT_SIZE,
+																				GroupLayout.PREFERRED_SIZE)
+																		.addGap(12)
+																		.addComponent(
+																				inforSeek_btn_enture))
+														.addGroup(
+																gl_inforSeek
+																		.createSequentialGroup()
+																		.addGap(216)
+																		.addComponent(
+																				label_6)))
+										.addContainerGap(46, Short.MAX_VALUE)));
+		gl_inforSeek
+				.setVerticalGroup(gl_inforSeek
+						.createParallelGroup(Alignment.LEADING)
+						.addGroup(
+								gl_inforSeek
+										.createSequentialGroup()
+										.addGap(6)
+										.addComponent(label_6)
+										.addPreferredGap(
+												ComponentPlacement.RELATED)
+										.addGroup(
+												gl_inforSeek
+														.createParallelGroup(
+																Alignment.BASELINE)
+														.addComponent(
+																inforSeek_selection,
+																GroupLayout.PREFERRED_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.PREFERRED_SIZE)
+														.addComponent(
+																inforSeek_btn_enture)
+														.addComponent(label_7)
+														.addComponent(
+																inforSeek_content,
+																GroupLayout.PREFERRED_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.PREFERRED_SIZE))
+										.addContainerGap(
+												GroupLayout.DEFAULT_SIZE,
+												Short.MAX_VALUE)));
+		inforSeek.setLayout(gl_inforSeek);
+		gl_inforSeek.setAutoCreateGaps(false);
+		gl_inforSeek.setAutoCreateContainerGaps(false);
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		groupLayout
 				.setHorizontalGroup(groupLayout
@@ -738,44 +745,35 @@ public class DormitoryManagement extends JFrame implements ActionListener {
 												groupLayout
 														.createParallelGroup(
 																Alignment.LEADING)
-														.addGroup(
-																groupLayout
-																		.createSequentialGroup()
-																		.addGroup(
-																				groupLayout
-																						.createParallelGroup(
-																								Alignment.LEADING,
-																								false)
-																						.addComponent(
-																								inforAdd,
-																								GroupLayout.DEFAULT_SIZE,
-																								479,
-																								Short.MAX_VALUE)
-																						.addComponent(
-																								inforUpdate,
-																								GroupLayout.DEFAULT_SIZE,
-																								479,
-																								Short.MAX_VALUE)
-																						.addComponent(
-																								inforDelete,
-																								GroupLayout.DEFAULT_SIZE,
-																								479,
-																								Short.MAX_VALUE)
-																						.addComponent(
-																								inforSeek,
-																								GroupLayout.PREFERRED_SIZE,
-																								484,
-																								GroupLayout.PREFERRED_SIZE))
-																		.addGap(10))
-														.addGroup(
-																groupLayout
-																		.createSequentialGroup()
-																		.addComponent(
-																				scrollPane,
-																				GroupLayout.DEFAULT_SIZE,
-																				482,
-																				Short.MAX_VALUE)
-																		.addContainerGap()))));
+														.addComponent(
+																scrollPane,
+																Alignment.TRAILING,
+																GroupLayout.DEFAULT_SIZE,
+																479,
+																Short.MAX_VALUE)
+														.addComponent(
+																inforAdd,
+																GroupLayout.DEFAULT_SIZE,
+																479,
+																Short.MAX_VALUE)
+														.addComponent(
+																inforSeek,
+																Alignment.TRAILING,
+																GroupLayout.DEFAULT_SIZE,
+																479,
+																Short.MAX_VALUE)
+														.addComponent(
+																inforUpdate,
+																Alignment.TRAILING,
+																GroupLayout.DEFAULT_SIZE,
+																479,
+																Short.MAX_VALUE)
+														.addComponent(
+																inforDelete,
+																GroupLayout.DEFAULT_SIZE,
+																479,
+																Short.MAX_VALUE))
+										.addContainerGap()));
 		groupLayout
 				.setVerticalGroup(groupLayout
 						.createParallelGroup(Alignment.LEADING)
@@ -792,11 +790,18 @@ public class DormitoryManagement extends JFrame implements ActionListener {
 														.addComponent(
 																function,
 																GroupLayout.DEFAULT_SIZE,
-																422,
+																424,
 																Short.MAX_VALUE)
 														.addGroup(
 																groupLayout
 																		.createSequentialGroup()
+																		.addComponent(
+																				inforAdd,
+																				GroupLayout.PREFERRED_SIZE,
+																				130,
+																				GroupLayout.PREFERRED_SIZE)
+																		.addPreferredGap(
+																				ComponentPlacement.RELATED)
 																		.addComponent(
 																				inforSeek,
 																				GroupLayout.PREFERRED_SIZE,
@@ -805,15 +810,9 @@ public class DormitoryManagement extends JFrame implements ActionListener {
 																		.addPreferredGap(
 																				ComponentPlacement.RELATED)
 																		.addComponent(
-																				inforAdd,
-																				GroupLayout.PREFERRED_SIZE,
-																				120,
-																				GroupLayout.PREFERRED_SIZE)
-																		.addGap(6)
-																		.addComponent(
 																				inforUpdate,
 																				GroupLayout.PREFERRED_SIZE,
-																				70,
+																				65,
 																				GroupLayout.PREFERRED_SIZE)
 																		.addPreferredGap(
 																				ComponentPlacement.RELATED)
@@ -823,11 +822,11 @@ public class DormitoryManagement extends JFrame implements ActionListener {
 																				70,
 																				GroupLayout.PREFERRED_SIZE)
 																		.addPreferredGap(
-																				ComponentPlacement.RELATED)
+																				ComponentPlacement.UNRELATED)
 																		.addComponent(
 																				scrollPane,
 																				GroupLayout.DEFAULT_SIZE,
-																				76,
+																				108,
 																				Short.MAX_VALUE)))
 										.addContainerGap()));
 		groupLayout.setAutoCreateGaps(true);
@@ -835,6 +834,7 @@ public class DormitoryManagement extends JFrame implements ActionListener {
 		infor_table = new JTable();
 		infor_table.setFillsViewportHeight(true);
 		infor_table.setModel(tableModel);
+		infor_table.setEnabled(false);
 		scrollPane.setViewportView(infor_table);
 		scrollPane.setVisible(true);
 
@@ -862,22 +862,52 @@ public class DormitoryManagement extends JFrame implements ActionListener {
 			inforSeek.setVisible(!inforSeek.isVisible());
 		} else if (command.equals("信息修改")) {
 			inforUpdate.setVisible(!inforUpdate.isVisible());
+			infor_table.setEnabled(inforUpdate.isVisible());
 		} else if (command.equals("信息删除")) {
 			inforDelete.setVisible(!inforDelete.isVisible());
 		} else if (command.equals("确认查询")) {
-			// System.out.println(inforSeek_content.getText());
 			seekInfor();
-
 		} else if (command.equals("确认添加")) {
 			addInputInfor();
-
 		} else if (command.equals("查询")) {
-
-		} else if (command.equals("修改")) {
-
+			seekInforForUpdate();
 		} else if (command.equals("确认删除")) {
 			deleteInfor();
+		} else if (command.equals("显示全部")) {
+			inforAdd.setVisible(false);
+			inforSeek.setVisible(false);
+			inforUpdate.setVisible(false);
+			inforDelete.setVisible(false);
+			showTableData();
+			tableModel.setDataVector(arrayStudentinfor, tableTitle);
+			tableModel.fireTableDataChanged();
 		}
+	}
+
+	private void seekInforForUpdate() {
+		// TODO Auto-generated method stub
+		String item = inforUpdate_content.getText();
+		String where = inforUpdate_selection_item;
+		if (!item.equals("")) {
+			tableModel.setRowCount(0);
+			tableModel.fireTableDataChanged();
+			List<StudentInfor> list = DB.query(item,
+					getSelectionToString(where));
+			if (list.size() == 0) {
+				JOptionPane.showMessageDialog(this, "查询的信息不存在！", "警告",
+						JOptionPane.ERROR_MESSAGE);
+
+			} else {
+				getStudnetInfor(list);
+				tableModel.setDataVector(arrayStudentinfor, tableTitle);
+				tableModel.fireTableDataChanged();
+				inforUpdate_btn_update.setEnabled(true);
+			}
+		} else {
+			JOptionPane.showMessageDialog(this, "请填写要查询的选项！", "警告",
+					JOptionPane.ERROR_MESSAGE);
+		}
+		inforUpdate_content.setText("");
 	}
 
 	private void deleteInfor() {
@@ -935,8 +965,8 @@ public class DormitoryManagement extends JFrame implements ActionListener {
 				+ inforAdd_selection_item_hostel_number;
 		String academy = inforAdd_selection_academy + "学院";
 		System.out.println("name:" + name);
-		if (!number.equals("") && !name.equals("") && !classStr.equals("")) {
-
+		if (!number.equals("") && !name.equals("") && !classStr.equals("")
+				&& number.length() == 10) {
 			StudentInfor infor = new StudentInfor(number, name, hostel,
 					classStr, academy);
 			int count = DB.insert(infor);
@@ -949,7 +979,7 @@ public class DormitoryManagement extends JFrame implements ActionListener {
 						JOptionPane.ERROR_MESSAGE);
 			}
 		} else {
-			JOptionPane.showMessageDialog(this, "请填写完整信息！", "警告",
+			JOptionPane.showMessageDialog(this, "请正确填写信息！", "警告",
 					JOptionPane.ERROR_MESSAGE);
 		}
 		inforAdd_class.setText("");
@@ -971,5 +1001,35 @@ public class DormitoryManagement extends JFrame implements ActionListener {
 			string = "student_class";
 		}
 		return string;
+	}
+
+	class MTableListener implements TableModelListener {
+
+		@Override
+		public void tableChanged(TableModelEvent e) {
+			// TODO Auto-generated method stub
+
+			TableModel model = (TableModel) e.getSource();
+			int row = e.getFirstRow();
+			int column = e.getColumn();
+			if (row >= 0 && column >= 0) {// 要修改的内容
+				String whereInfor = arrayStudentinfor[row][0];
+				String whereName = getSelectionToString(model.getColumnName(0));
+				String updateName = getSelectionToString(model
+						.getColumnName(column));// 要修改的地方
+				String updateInfor = (String) model.getValueAt(row, column);
+				System.out.println(updateName + ":" + updateInfor);
+				System.out.println(whereName + ":" + whereInfor);
+				if (!updateInfor.equals(arrayStudentinfor[row][column])) {
+					int n = JOptionPane.showConfirmDialog(
+							DormitoryManagement.this, "是否更新该数据？", "数据更新",
+							JOptionPane.YES_NO_OPTION);
+					if (n == 0) {
+						DB.update(updateName, updateInfor, whereName,
+								whereInfor);
+					}
+				}
+			}
+		}
 	}
 }
