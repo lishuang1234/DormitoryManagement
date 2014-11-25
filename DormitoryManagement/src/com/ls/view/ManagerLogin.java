@@ -13,6 +13,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -90,30 +91,32 @@ public class ManagerLogin extends JFrame implements ActionListener {
 
 		JLabel lblNewLabel_2 = new JLabel("develope by ls");
 		GroupLayout gl_panel = new GroupLayout(panel);
-		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addContainerGap(298, Short.MAX_VALUE)
-					.addComponent(lblNewLabel_2))
-				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(91)
-					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(91, Short.MAX_VALUE))
-				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(134)
-					.addComponent(lblNewLabel)
-					.addContainerGap(134, Short.MAX_VALUE))
-		);
-		gl_panel.setVerticalGroup(
-			gl_panel.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addContainerGap(28, Short.MAX_VALUE)
-					.addComponent(lblNewLabel)
-					.addGap(26)
-					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
-					.addGap(13)
-					.addComponent(lblNewLabel_2))
-		);
+		gl_panel.setHorizontalGroup(gl_panel
+				.createParallelGroup(Alignment.LEADING)
+				.addGroup(
+						gl_panel.createSequentialGroup()
+								.addContainerGap(298, Short.MAX_VALUE)
+								.addComponent(lblNewLabel_2))
+				.addGroup(
+						gl_panel.createSequentialGroup()
+								.addGap(91)
+								.addComponent(panel_1,
+										GroupLayout.PREFERRED_SIZE, 200,
+										GroupLayout.PREFERRED_SIZE)
+								.addContainerGap(91, Short.MAX_VALUE))
+				.addGroup(
+						gl_panel.createSequentialGroup().addGap(134)
+								.addComponent(lblNewLabel)
+								.addContainerGap(134, Short.MAX_VALUE)));
+		gl_panel.setVerticalGroup(gl_panel.createParallelGroup(
+				Alignment.TRAILING).addGroup(
+				gl_panel.createSequentialGroup()
+						.addContainerGap(28, Short.MAX_VALUE)
+						.addComponent(lblNewLabel)
+						.addGap(26)
+						.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 155,
+								GroupLayout.PREFERRED_SIZE).addGap(13)
+						.addComponent(lblNewLabel_2)));
 
 		JLabel label = new JLabel("\u8D26\u53F7");
 
@@ -130,42 +133,96 @@ public class ManagerLogin extends JFrame implements ActionListener {
 		login_password = new JPasswordField();
 		login_password.setColumns(5);
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
-		gl_panel_1.setHorizontalGroup(
-			gl_panel_1.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panel_1.createSequentialGroup()
-					.addGap(31)
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_panel_1.createSequentialGroup()
-							.addComponent(login_btn_enture, GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(login_btn_quit))
-						.addGroup(gl_panel_1.createSequentialGroup()
-							.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
-								.addComponent(lblNewLabel_1)
-								.addComponent(label))
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-								.addComponent(login_password, GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
-								.addComponent(login_name, GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE))))
-					.addGap(37))
-		);
-		gl_panel_1.setVerticalGroup(
-			gl_panel_1.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_1.createSequentialGroup()
-					.addGap(24)
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-						.addComponent(label)
-						.addComponent(login_name, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(27)
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewLabel_1)
-						.addComponent(login_password, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(29)
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-						.addComponent(login_btn_enture)
-						.addComponent(login_btn_quit))
-					.addContainerGap())
-		);
+		gl_panel_1
+				.setHorizontalGroup(gl_panel_1
+						.createParallelGroup(Alignment.TRAILING)
+						.addGroup(
+								gl_panel_1
+										.createSequentialGroup()
+										.addGap(31)
+										.addGroup(
+												gl_panel_1
+														.createParallelGroup(
+																Alignment.TRAILING)
+														.addGroup(
+																gl_panel_1
+																		.createSequentialGroup()
+																		.addComponent(
+																				login_btn_enture,
+																				GroupLayout.DEFAULT_SIZE,
+																				65,
+																				Short.MAX_VALUE)
+																		.addPreferredGap(
+																				ComponentPlacement.UNRELATED)
+																		.addComponent(
+																				login_btn_quit))
+														.addGroup(
+																gl_panel_1
+																		.createSequentialGroup()
+																		.addGroup(
+																				gl_panel_1
+																						.createParallelGroup(
+																								Alignment.TRAILING)
+																						.addComponent(
+																								lblNewLabel_1)
+																						.addComponent(
+																								label))
+																		.addPreferredGap(
+																				ComponentPlacement.UNRELATED)
+																		.addGroup(
+																				gl_panel_1
+																						.createParallelGroup(
+																								Alignment.LEADING)
+																						.addComponent(
+																								login_password,
+																								GroupLayout.DEFAULT_SIZE,
+																								98,
+																								Short.MAX_VALUE)
+																						.addComponent(
+																								login_name,
+																								GroupLayout.DEFAULT_SIZE,
+																								98,
+																								Short.MAX_VALUE))))
+										.addGap(37)));
+		gl_panel_1
+				.setVerticalGroup(gl_panel_1
+						.createParallelGroup(Alignment.LEADING)
+						.addGroup(
+								gl_panel_1
+										.createSequentialGroup()
+										.addGap(24)
+										.addGroup(
+												gl_panel_1
+														.createParallelGroup(
+																Alignment.BASELINE)
+														.addComponent(label)
+														.addComponent(
+																login_name,
+																GroupLayout.PREFERRED_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.PREFERRED_SIZE))
+										.addGap(27)
+										.addGroup(
+												gl_panel_1
+														.createParallelGroup(
+																Alignment.BASELINE)
+														.addComponent(
+																lblNewLabel_1)
+														.addComponent(
+																login_password,
+																GroupLayout.PREFERRED_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.PREFERRED_SIZE))
+										.addGap(29)
+										.addGroup(
+												gl_panel_1
+														.createParallelGroup(
+																Alignment.BASELINE)
+														.addComponent(
+																login_btn_enture)
+														.addComponent(
+																login_btn_quit))
+										.addContainerGap()));
 		panel_1.setLayout(gl_panel_1);
 		panel.setLayout(gl_panel);
 		contentPane.setLayout(gl_contentPane);
@@ -195,6 +252,9 @@ public class ManagerLogin extends JFrame implements ActionListener {
 						}
 					});
 					this.dispose();
+				} else {
+					JOptionPane.showMessageDialog(this, "’À∫≈ªÚ√‹¬Î¥ÌŒÛ£°", "¥ÌŒÛ",
+							JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		} else if (command.equals("ÕÀ≥ˆ")) {
